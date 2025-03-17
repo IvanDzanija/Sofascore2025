@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55618E582D78526C00AF391A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55618E572D78526C00AF391A /* SnapKit */; };
-		55618E5A2D78526C00AF391A /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 55618E592D78526C00AF391A /* SnapKit-Dynamic */; };
+		55055AE22D8797DB00F476B7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55055AE12D8797DB00F476B7 /* SnapKit */; };
+		550C89652D8789D500DD32FC /* SofaAcademic in Frameworks */ = {isa = PBXBuildFile; productRef = 550C89642D8789D500DD32FC /* SofaAcademic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55618E582D78526C00AF391A /* SnapKit in Frameworks */,
-				55618E5A2D78526C00AF391A /* SnapKit-Dynamic in Frameworks */,
+				550C89652D8789D500DD32FC /* SofaAcademic in Frameworks */,
+				55055AE22D8797DB00F476B7 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,8 +85,8 @@
 			);
 			name = Sofascore2025;
 			packageProductDependencies = (
-				55618E572D78526C00AF391A /* SnapKit */,
-				55618E592D78526C00AF391A /* SnapKit-Dynamic */,
+				550C89642D8789D500DD32FC /* SofaAcademic */,
+				55055AE12D8797DB00F476B7 /* SnapKit */,
 			);
 			productName = Sofascore2025;
 			productReference = 55C213E92D765A9E0044DD21 /* Sofascore2025.app */;
@@ -117,7 +117,8 @@
 			mainGroup = 55C213E02D765A9E0044DD21;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				55618E562D78526C00AF391A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				550C89632D8789D500DD32FC /* XCRemoteSwiftPackageReference "academy" */,
+				55055AE02D8797DB00F476B7 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 55C213EA2D765A9E0044DD21 /* Products */;
@@ -162,7 +163,7 @@
 				INFOPLIST_FILE = Sofascore2025/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -190,7 +191,7 @@
 				INFOPLIST_FILE = Sofascore2025/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -244,6 +245,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -307,6 +309,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -349,7 +352,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		55618E562D78526C00AF391A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		55055AE02D8797DB00F476B7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -357,18 +360,26 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		550C89632D8789D500DD32FC /* XCRemoteSwiftPackageReference "academy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sofascore/academy/";
+			requirement = {
+				branch = hw2;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		55618E572D78526C00AF391A /* SnapKit */ = {
+		55055AE12D8797DB00F476B7 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 55618E562D78526C00AF391A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 55055AE02D8797DB00F476B7 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		55618E592D78526C00AF391A /* SnapKit-Dynamic */ = {
+		550C89642D8789D500DD32FC /* SofaAcademic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 55618E562D78526C00AF391A /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
+			package = 550C89632D8789D500DD32FC /* XCRemoteSwiftPackageReference "academy" */;
+			productName = SofaAcademic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
