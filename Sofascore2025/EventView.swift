@@ -19,6 +19,7 @@ class EventView: BaseView {
 		self._match = match
 		super.init()
 	}
+	
 	override func addViews() {
 		super.addViews()
 		addSubview(clock)
