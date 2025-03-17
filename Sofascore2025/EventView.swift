@@ -148,7 +148,7 @@ class EventView: BaseView {
 		awayTeamImageView.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(80)
 			current.top.equalToSuperview().inset(30)
-			current.width.height.equalTo(16)
+			current.size.equalTo(16)
 		}
 			
 //		homeTeamName constraints
