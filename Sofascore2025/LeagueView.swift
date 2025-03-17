@@ -13,6 +13,7 @@ final class LeagueView: BaseView {
 		self.league = league
 		super.init()
 	}
+	
 	override func addViews() {
 		super.addViews()
 		addSubview(logoImageView)
