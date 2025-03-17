@@ -95,7 +95,7 @@ class EventView: BaseView {
 			setupUpcomingStyle()
 		}
 		else if (self._match.status == .inProgress) {
-			let timer = Int(Date().timeIntervalSince1970) - self._match.startTimestamp / 60
+			let timer = (Int(Date().timeIntervalSince1970) - self._match.startTimestamp) / 60
 			clock.text = String(timer) + "'"
 			setupInProgressStyle()
 		}
