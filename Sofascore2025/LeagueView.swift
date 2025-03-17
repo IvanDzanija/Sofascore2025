@@ -44,7 +44,6 @@ final class LeagueView: BaseView {
 		nameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
 //		countryLabel.adjustsFontSizeToFitWidth = true
 		nameLabel.textColor = .gray
-		
 			
 		if let logoUrl = self.league.logoUrl, let url = URL(string: logoUrl) {
 				loadImage(from: url)
