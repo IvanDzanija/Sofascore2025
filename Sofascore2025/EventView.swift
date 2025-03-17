@@ -61,11 +61,11 @@ class EventView: BaseView {
 		
 		
 //		clock styling -> only font is constant
-//		clock.font = UIFont(name: "Roboto-Regular", size: 12)
+		clock.font = UIFont(name: "Roboto-Regular", size: 12)
 		clock.textAlignment = .center
 	
 //		startTime styling
-//		startTime.font = UIFont(name: "Roboto-Regular", size: 12)
+		startTime.font = UIFont(name: "Roboto-Regular", size: 12)
 		startTime.textColor = .gray
 		startTime.textAlignment = .center
 		
@@ -83,8 +83,8 @@ class EventView: BaseView {
 		awayTeamImage.clipsToBounds = true
 		
 //		teamName styling -> only font is constant
-//		homeTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
-//		awayTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
+		homeTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
+		awayTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
 		
 //		score styling -> only font is constant
 		homeTeamScore.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -95,9 +95,8 @@ class EventView: BaseView {
 			setupUpcomingStyle()
 		}
 		else if (self._match.status == .inProgress) {
-			let elapsedTime = Int(Date().timeIntervalSince1970) - self._match.startTimestamp
-			let minutes = elapsedTime / 60
-			clock.text = String(minutes) + "'"
+			let timer = Int(Date().timeIntervalSince1970) - self._match.startTimestamp / 60
+			clock.text = String(timer) + "'"
 			setupInProgressStyle()
 		}
 		else if (self._match.status == .halftime) {
@@ -115,61 +114,61 @@ class EventView: BaseView {
 		
 //		startTime constraints
 		startTime.snp.makeConstraints { current in
-			current.top.equalToSuperview()
+			current.top.equalToSuperview().inset(10)
 			current.width.equalTo(56)
-//			current.leading.equalToSuperview().offset(8)
+			current.leading.equalToSuperview().inset(4)
 		}
 		
 //		clock constraints
 		clock.snp.makeConstraints { current in
 			current.centerX.equalTo(startTime.snp.centerX)
-			current.top.equalTo(startTime.snp.bottom).offset(8)
-//			current.leading.equalTo(startTime.snp.trailing).offset(8)
-//			current.height.equalTo(16)
+			current.top.equalToSuperview().inset(30)
+			current.leading.equalToSuperview().inset(4)
+			current.height.equalTo(16)
 			current.width.equalTo(56)
 		}
 		
 //		splitLabel constraints
 		splitLabel.snp.makeConstraints { current in
 			current.top.equalToSuperview().inset(8)
-			current.leading.equalTo(startTime.snp.trailing).offset(4)
+			current.leading.equalToSuperview().inset(63)
 			current.height.equalTo(40)
 			current.width.equalTo(1)
 		}
 		
 //		homeTeamImage constraints
 		homeTeamImage.snp.makeConstraints { current in
-			current.leading.equalTo(clock.snp.trailing).offset(16)
-			current.top.equalToSuperview().offset(8)
+			current.leading.equalToSuperview().inset(80)
+			current.top.equalToSuperview().inset(10)
 			current.width.height.equalTo(16)
 		}
 		
 //		awayTeamImage constraints
 		awayTeamImage.snp.makeConstraints { current in
-			current.leading.equalTo(clock.snp.trailing).offset(16)
-			current.top.equalTo(homeTeamImage.snp.bottom).offset(8)
+			current.leading.equalToSuperview().inset(80)
+			current.top.equalToSuperview().inset(30)
 			current.width.height.equalTo(16)
 		}
 			
 //		homeTeamName constraints
 		homeTeamName.snp.makeConstraints { current in
-			current.leading.equalTo(homeTeamImage.snp.trailing).offset(8)
+			current.leading.equalToSuperview().inset(104)
 			current.centerY.equalTo(homeTeamImage.snp.centerY)
 			current.height.equalTo(16)
-			current.width.equalTo(128)
+			current.width.equalTo(192)
 		}
 		
 //		awayTeamName constraints
 		awayTeamName.snp.makeConstraints { current in
-			current.leading.equalTo(awayTeamImage.snp.trailing).offset(8)
+			current.leading.equalToSuperview().inset(104)
 			current.centerY.equalTo(awayTeamImage.snp.centerY)
 			current.height.equalTo(16)
-			current.width.equalTo(128)
+			current.width.equalTo(192)
 		}
 		
 //		homeTeamScore constraints
 		homeTeamScore.snp.makeConstraints { current in
-			current.leading.equalTo(homeTeamName.snp.trailing).offset(32)
+			current.trailing.equalToSuperview().inset(16)
 			current.centerY.equalTo(homeTeamName.snp.centerY)
 			current.height.equalTo(16)
 			current.width.equalTo(32)
@@ -177,7 +176,7 @@ class EventView: BaseView {
 		
 //		awayTeamScore constraints
 		awayTeamScore.snp.makeConstraints { current in
-			current.leading.equalTo(awayTeamName.snp.trailing).offset(32)
+			current.trailing.equalToSuperview().inset(16)
 			current.centerY.equalTo(awayTeamName.snp.centerY)
 			current.height.equalTo(16)
 			current.width.equalTo(32)

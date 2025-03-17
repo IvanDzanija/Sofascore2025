@@ -30,7 +30,8 @@ class LeagueView: BaseView {
 		logoLabel.clipsToBounds = true
 
 //		countryLabel styling
-//		countryLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+		countryLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+//		countryLabel.adjustsFontSizeToFitWidth = true
 		countryLabel.textColor = .black
 		
 //		splitLabel styling
@@ -39,7 +40,8 @@ class LeagueView: BaseView {
 		splitLabel.image = UIImage(named: "ic_pointer_right")
 		
 //		nameLabel styling
-//		nameLabel.font = UIFont(name: "Roboto-Regular",size: 14)
+		nameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+//		countryLabel.adjustsFontSizeToFitWidth = true
 		nameLabel.textColor = .gray
 		
 			
@@ -58,29 +60,29 @@ class LeagueView: BaseView {
 		
 //		 logoLabel constraints
 		logoLabel.snp.makeConstraints { current in
-			current.top.equalToSuperview().inset(16)
+			current.top.equalToSuperview().inset(12)
 			current.width.height.equalTo(32)
-			current.leading.equalToSuperview().inset(20)
+			current.leading.equalToSuperview().inset(16)
 		}
 		
 //		 countryLabel constraints
 		countryLabel.snp.makeConstraints { current in
 			current.centerY.equalTo(logoLabel)
-			current.leading.equalToSuperview().inset(60)
+			current.leading.equalToSuperview().inset(80)
 			current.height.equalTo(24)
 		}
 		
 //		 splitLabel constraints
 		splitLabel.snp.makeConstraints { current in
 			current.centerY.equalTo(countryLabel)
-			current.leading.equalToSuperview().offset(100)
-			current.height.equalTo(24)
+			current.leading.equalTo(countryLabel.snp.trailing)
+			current.height.equalTo(countryLabel)
 		}
 		
 //		 nameLabel constraints
 		nameLabel.snp.makeConstraints { current in
 			current.centerY.equalTo(countryLabel)
-			current.leading.equalToSuperview().inset(130)
+			current.leading.equalTo(splitLabel.snp.trailing)
 			current.height.equalTo(countryLabel)
 		}
 		

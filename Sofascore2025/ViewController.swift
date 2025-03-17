@@ -22,9 +22,9 @@ class ViewController: UIViewController {
 		let leagueView = LeagueView(league: league)
 		self.view.addSubview(leagueView)
 		leagueView.snp.makeConstraints { current in
-			current.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(8)
+			current.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
 			current.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
-			current.height.equalTo(64)
+			current.height.equalTo(56)
 		}
 		
 //		load events
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
 		self.view.addSubview(eventViewList)
 		eventViewList.axis = .vertical
 		eventViewList.snp.makeConstraints { current in
-			current.top.equalTo(leagueView.snp.bottom).offset(16)
+			current.top.equalTo(leagueView.snp.bottom)
 			current.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
 			current.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
 		}
