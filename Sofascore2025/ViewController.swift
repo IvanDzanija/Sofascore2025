@@ -44,7 +44,6 @@ class ViewController: UIViewController {
 				current.height.equalTo(56)
 				current.width.equalTo(eventViewList.snp.width)
 			}
-			eventView.backgroundColor = .yellow
 		}
 		
 	}
