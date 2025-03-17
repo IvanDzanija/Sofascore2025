@@ -51,7 +51,6 @@ class EventView: BaseView {
 		if let awayScore = event.awayScore {
 			awayTeamScore.text = String(awayScore)
 		}
-
 		
 		if let urlHome = event.homeTeam.logoUrl, let url = URL(string: urlHome) {
 			loadImage(from: url, isHome: true)
@@ -60,8 +59,7 @@ class EventView: BaseView {
 			loadImage(from: url, isHome: false)
 		}
 		
-		
-//		clock styling -> only font is constant
+//		clock styling
 		clock.font = UIFont(name: "Roboto-Regular", size: 12)
 		clock.textAlignment = .center
 	
@@ -83,11 +81,11 @@ class EventView: BaseView {
 		awayTeamImageView.contentMode = .scaleAspectFit
 		awayTeamImageView.clipsToBounds = true
 		
-//		teamName styling -> only font is constant
+//		teamName styling
 		homeTeamNameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
 		awayTeamNameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
 		
-//		score styling -> only font is constant
+//		score styling
 		Label.font = UIFont(name: "Roboto-Regular", size: 14)
 		awayTeamScore.font = UIFont(name: "Roboto-Regular", size: 14)
 		
@@ -107,7 +105,6 @@ class EventView: BaseView {
 		else if (self.event.status == .finished) {
 			setupFinishedStyle()
 		}
-		
 	}
 
 	override func setupConstraints() {
@@ -182,8 +179,6 @@ class EventView: BaseView {
 			current.height.equalTo(16)
 			current.width.equalTo(32)
 		}
-		
-		
 	}
 	
 	private func setupUpcomingStyle() {
