@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class LeagueView: BaseView {
+final class LeagueView: BaseView {
 	private let league: League
 	private let logoImageView = UIImageView()
 	private let countryLabel = UILabel()
