@@ -3,11 +3,11 @@ import SnapKit
 import SofaAcademic
 
 class LeagueView: BaseView {
-	private var league: League
-	private var logoLabel = UIImageView()
-	private var countryLabel = UILabel()
-	private var splitLabel = UIImageView()
-	private var nameLabel = UILabel()
+	private let league: League
+	private let logoImageView = UIImageView()
+	private let countryLabel = UILabel()
+	private let splitImageView = UIImageView()
+	private let nameLabel = UILabel()
 	
 	init(league: League) {
 		self.league = league
@@ -15,9 +15,9 @@ class LeagueView: BaseView {
 	}
 	override func addViews() {
 		super.addViews()
-		addSubview(logoLabel)
+		addSubview(logoImageView)
 		addSubview(countryLabel)
-		addSubview(splitLabel)
+		addSubview(splitImageView)
 		addSubview(nameLabel)
 	}
 
@@ -26,8 +26,8 @@ class LeagueView: BaseView {
 		backgroundColor = .white
 		
 //		logoLabel styling
-		logoLabel.contentMode = .scaleAspectFit
-		logoLabel.clipsToBounds = true
+		logoImageView.contentMode = .scaleAspectFit
+		logoImageView.clipsToBounds = true
 
 //		countryLabel styling
 		countryLabel.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -35,9 +35,9 @@ class LeagueView: BaseView {
 		countryLabel.textColor = .black
 		
 //		splitLabel styling
-		splitLabel.contentMode = .scaleAspectFit
-		splitLabel.clipsToBounds = true
-		splitLabel.image = UIImage(named: "ic_pointer_right")
+		splitImageView.contentMode = .scaleAspectFit
+		splitImageView.clipsToBounds = true
+		splitImageView.image = UIImage(named: "ic_pointer_right")
 		
 //		nameLabel styling
 		nameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -59,7 +59,7 @@ class LeagueView: BaseView {
 		super.setupConstraints()
 		
 //		 logoLabel constraints
-		logoLabel.snp.makeConstraints { current in
+		logoImageView.snp.makeConstraints { current in
 			current.top.equalToSuperview().inset(12)
 			current.width.height.equalTo(32)
 			current.leading.equalToSuperview().inset(16)
@@ -67,13 +67,13 @@ class LeagueView: BaseView {
 		
 //		 countryLabel constraints
 		countryLabel.snp.makeConstraints { current in
-			current.centerY.equalTo(logoLabel)
+			current.centerY.equalTo(logoImageView)
 			current.leading.equalToSuperview().inset(80)
 			current.height.equalTo(24)
 		}
 		
 //		 splitLabel constraints
-		splitLabel.snp.makeConstraints { current in
+		splitImageView.snp.makeConstraints { current in
 			current.centerY.equalTo(countryLabel)
 			current.leading.equalTo(countryLabel.snp.trailing)
 			current.height.equalTo(countryLabel)
@@ -82,7 +82,7 @@ class LeagueView: BaseView {
 //		 nameLabel constraints
 		nameLabel.snp.makeConstraints { current in
 			current.centerY.equalTo(countryLabel)
-			current.leading.equalTo(splitLabel.snp.trailing)
+			current.leading.equalTo(splitImageView.snp.trailing)
 			current.height.equalTo(countryLabel)
 		}
 		
@@ -91,7 +91,7 @@ class LeagueView: BaseView {
 			URLSession.shared.dataTask(with: url) { data, response, error in
 				if let data = data, let image = UIImage(data: data) {
 					DispatchQueue.main.async {
-						self.logoLabel.image = image
+						self.logoImageView.image = image
 					}
 				}
 			}.resume()

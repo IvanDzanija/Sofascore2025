@@ -4,19 +4,19 @@ import SofaAcademic
 
 
 class EventView: BaseView {
-	private var _match : Event
-	private var homeTeamImageView = UIImageView()
-	private var awayTeamImage = UIImageView()
-	private var homeTeamName = UILabel()
-	private var awayTeamName = UILabel()
-	private var homeTeamScore = UILabel()
-	private var awayTeamScore = UILabel()
-	private var startTime = UILabel()
-	private var clock = UILabel()
-	private var splitLabel = UIImageView()
+	private let event : Event
+	private let homeTeamImageView = UIImageView()
+	private let awayTeamImageView = UIImageView()
+	private let homeTeamNameLabel = UILabel()
+	private let awayTeamNameLabel = UILabel()
+	private let Label = UILabel()
+	private let awayTeamScore = UILabel()
+	private let startTime = UILabel()
+	private let clock = UILabel()
+	private let splitLabel = UIImageView()
 	
-	init(match: Event) {
-		self._match = match
+	init(event: Event) {
+		self.event = event
 		super.init()
 	}
 	
@@ -25,11 +25,11 @@ class EventView: BaseView {
 		addSubview(clock)
 		addSubview(startTime)
 		addSubview(splitLabel)
-		addSubview(homeTeamImage)
-		addSubview(awayTeamImage)
-		addSubview(homeTeamName)
-		addSubview(awayTeamName)
-		addSubview(homeTeamScore)
+		addSubview(homeTeamImageView)
+		addSubview(awayTeamImageView)
+		addSubview(homeTeamNameLabel)
+		addSubview(awayTeamNameLabel)
+		addSubview(Label)
 		addSubview(awayTeamScore)
 	}
 
@@ -40,23 +40,23 @@ class EventView: BaseView {
 		let formatter = DateFormatter()
 		formatter.dateFormat = "HH:mm"
 
-		startTime.text = formatter.string(from : Date(timeIntervalSince1970: TimeInterval(_match.startTimestamp)))
+		startTime.text = formatter.string(from : Date(timeIntervalSince1970: TimeInterval(event.startTimestamp)))
 		
-		homeTeamName.text = _match.homeTeam.name
-		awayTeamName.text =  _match.awayTeam.name
+		homeTeamNameLabel.text = event.homeTeam.name
+		awayTeamNameLabel.text =  event.awayTeam.name
 		
-		if let homeScore = _match.homeScore {
-			homeTeamScore.text = String(homeScore)
+		if let homeScore = event.homeScore {
+			Label.text = String(homeScore)
 		}
-		if let awayScore = _match.awayScore {
+		if let awayScore = event.awayScore {
 			awayTeamScore.text = String(awayScore)
 		}
 
 		
-		if let urlHome = _match.homeTeam.logoUrl, let url = URL(string: urlHome) {
+		if let urlHome = event.homeTeam.logoUrl, let url = URL(string: urlHome) {
 			loadImage(from: url, isHome: true)
 		}
-		if let urlAway = _match.awayTeam.logoUrl, let url = URL(string: urlAway) {
+		if let urlAway = event.awayTeam.logoUrl, let url = URL(string: urlAway) {
 			loadImage(from: url, isHome: false)
 		}
 		
@@ -76,35 +76,35 @@ class EventView: BaseView {
 		splitLabel.clipsToBounds = true
 		
 //		homeTeamImage styling
-		homeTeamImage.contentMode = .scaleAspectFit
-		homeTeamImage.clipsToBounds = true
+		homeTeamImageView.contentMode = .scaleAspectFit
+		homeTeamImageView.clipsToBounds = true
 		
 //		awayTeamImage styling
-		awayTeamImage.contentMode = .scaleAspectFit
-		awayTeamImage.clipsToBounds = true
+		awayTeamImageView.contentMode = .scaleAspectFit
+		awayTeamImageView.clipsToBounds = true
 		
 //		teamName styling -> only font is constant
-		homeTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
-		awayTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
+		homeTeamNameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+		awayTeamNameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
 		
 //		score styling -> only font is constant
-		homeTeamScore.font = UIFont(name: "Roboto-Regular", size: 14)
+		Label.font = UIFont(name: "Roboto-Regular", size: 14)
 		awayTeamScore.font = UIFont(name: "Roboto-Regular", size: 14)
 		
 //		match didn't start yet
-		if (self._match.status == .notStarted) {
+		if (self.event.status == .notStarted) {
 			setupUpcomingStyle()
 		}
-		else if (self._match.status == .inProgress) {
-			let timer = (Int(Date().timeIntervalSince1970) - self._match.startTimestamp) / 60
+		else if (self.event.status == .inProgress) {
+			let timer = (Int(Date().timeIntervalSince1970) - self.event.startTimestamp) / 60
 			clock.text = String(timer) + "'"
 			setupInProgressStyle()
 		}
-		else if (self._match.status == .halftime) {
+		else if (self.event.status == .halftime) {
 			setupHalftimeStyle()
 		}
 			
-		else if (self._match.status == .finished) {
+		else if (self.event.status == .finished) {
 			setupFinishedStyle()
 		}
 		
@@ -138,39 +138,39 @@ class EventView: BaseView {
 		}
 		
 //		homeTeamImage constraints
-		homeTeamImage.snp.makeConstraints { current in
+		homeTeamImageView.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(80)
 			current.top.equalToSuperview().inset(10)
 			current.width.height.equalTo(16)
 		}
 		
 //		awayTeamImage constraints
-		awayTeamImage.snp.makeConstraints { current in
+		awayTeamImageView.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(80)
 			current.top.equalToSuperview().inset(30)
 			current.width.height.equalTo(16)
 		}
 			
 //		homeTeamName constraints
-		homeTeamName.snp.makeConstraints { current in
+		homeTeamNameLabel.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(104)
-			current.centerY.equalTo(homeTeamImage.snp.centerY)
+			current.centerY.equalTo(homeTeamImageView.snp.centerY)
 			current.height.equalTo(16)
 			current.width.equalTo(192)
 		}
 		
 //		awayTeamName constraints
-		awayTeamName.snp.makeConstraints { current in
+		awayTeamNameLabel.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(104)
-			current.centerY.equalTo(awayTeamImage.snp.centerY)
+			current.centerY.equalTo(awayTeamImageView.snp.centerY)
 			current.height.equalTo(16)
 			current.width.equalTo(192)
 		}
 		
 //		homeTeamScore constraints
-		homeTeamScore.snp.makeConstraints { current in
+		Label.snp.makeConstraints { current in
 			current.trailing.equalToSuperview().inset(16)
-			current.centerY.equalTo(homeTeamName.snp.centerY)
+			current.centerY.equalTo(homeTeamNameLabel.snp.centerY)
 			current.height.equalTo(16)
 			current.width.equalTo(32)
 		}
@@ -178,7 +178,7 @@ class EventView: BaseView {
 //		awayTeamScore constraints
 		awayTeamScore.snp.makeConstraints { current in
 			current.trailing.equalToSuperview().inset(16)
-			current.centerY.equalTo(awayTeamName.snp.centerY)
+			current.centerY.equalTo(awayTeamNameLabel.snp.centerY)
 			current.height.equalTo(16)
 			current.width.equalTo(32)
 		}
@@ -187,7 +187,7 @@ class EventView: BaseView {
 	}
 	
 	private func setupUpcomingStyle() {
-		homeTeamScore.isHidden = true
+		Label.isHidden = true
 		awayTeamScore.isHidden = true
 		
 //		clock styling
@@ -195,34 +195,34 @@ class EventView: BaseView {
 		clock.text = "-"
 		
 //		homeTeamName styling
-		homeTeamName.textColor = .black
+		homeTeamNameLabel.textColor = .black
 		
 //		awayTeamName styling
-		awayTeamName.textColor = .black
+		awayTeamNameLabel.textColor = .black
 	}
 	
 	private func setupInProgressStyle() {
-		homeTeamScore.isHidden = false
+		Label.isHidden = false
 		awayTeamScore.isHidden = false
 		
 //		clock styling
 		clock.textColor = .red
 		
 //		homeTeamName styling
-		homeTeamName.textColor = .black
+		homeTeamNameLabel.textColor = .black
 		
 //		awayTeamName styling
-		awayTeamName.textColor = .black
+		awayTeamNameLabel.textColor = .black
 		
 //		homeTeamScore styling
-		homeTeamScore.textColor = .red
+		Label.textColor = .red
 
 //		awayTeamScore styling
 		awayTeamScore.textColor = .red
 	}
 	
 	private func setupHalftimeStyle() {
-		homeTeamScore.isHidden = false
+		Label.isHidden = false
 		awayTeamScore.isHidden = false
 		
 //		clock styling
@@ -230,20 +230,20 @@ class EventView: BaseView {
 		clock.text = "HT"
 		
 //		homeTeamName styling
-		homeTeamName.textColor = .black
+		homeTeamNameLabel.textColor = .black
 		
 //		awayTeamName styling
-		awayTeamName.textColor = .black
+		awayTeamNameLabel.textColor = .black
 		
 //		homeTeamScore styling
-		homeTeamScore.textColor = .red
+		Label.textColor = .red
 		
 //		awayTeamScore styling
 		awayTeamScore.textColor = .red
 	}
 	
 	private func setupFinishedStyle() {
-		homeTeamScore.isHidden = false
+		Label.isHidden = false
 		awayTeamScore.isHidden = false
 		
 //		clock styling
@@ -251,23 +251,23 @@ class EventView: BaseView {
 		clock.text = "FT"
 	
 //		teamName && teamScore styling
-		if (_match.homeScore! > _match.awayScore!) {
-			homeTeamName.textColor = .black
-			homeTeamScore.textColor = .black
-			awayTeamName.textColor = .gray
+		if (event.homeScore! > event.awayScore!) {
+			homeTeamNameLabel.textColor = .black
+			Label.textColor = .black
+			awayTeamNameLabel.textColor = .gray
 			awayTeamScore.textColor = .gray
 			
 		}
-		else if (_match.homeScore! < _match.awayScore!) {
-			homeTeamName.textColor = .gray
-			homeTeamScore.textColor = .gray
-			awayTeamName.textColor = .black
+		else if (event.homeScore! < event.awayScore!) {
+			homeTeamNameLabel.textColor = .gray
+			Label.textColor = .gray
+			awayTeamNameLabel.textColor = .black
 			awayTeamScore.textColor = .black
 		}
 		else {
-			homeTeamName.textColor = .black
-			homeTeamScore.textColor = .black
-			awayTeamName.textColor = .black
+			homeTeamNameLabel.textColor = .black
+			Label.textColor = .black
+			awayTeamNameLabel.textColor = .black
 			awayTeamScore.textColor = .black
 		}
 	}
@@ -277,10 +277,10 @@ class EventView: BaseView {
 				if let data = data, let image = UIImage(data: data) {
 					DispatchQueue.main.async {
 						if (isHome) {
-							self.homeTeamImage.image = image
+							self.homeTeamImageView.image = image
 						}
 						else {
-							self.awayTeamImage.image = image
+							self.awayTeamImageView.image = image
 						}
 						
 					}
