@@ -21,7 +21,6 @@ class EventView: BaseView {
 	}
 	
 	override func addViews() {
-		super.addViews()
 		addSubview(clock)
 		addSubview(startTime)
 		addSubview(splitLabel)
@@ -34,7 +33,6 @@ class EventView: BaseView {
 	}
 
 	override func styleViews() {
-		super.styleViews()
 		backgroundColor = .white
 		
 		let formatter = DateFormatter()
@@ -110,14 +108,12 @@ class EventView: BaseView {
 	override func setupConstraints() {
 		super.setupConstraints()
 		
-//		startTime constraints
 		startTime.snp.makeConstraints { current in
 			current.top.equalToSuperview().inset(10)
 			current.width.equalTo(56)
 			current.leading.equalToSuperview().inset(4)
 		}
 		
-//		clock constraints
 		clock.snp.makeConstraints { current in
 			current.centerX.equalTo(startTime.snp.centerX)
 			current.top.equalToSuperview().inset(30)
@@ -126,7 +122,6 @@ class EventView: BaseView {
 			current.width.equalTo(56)
 		}
 		
-//		splitLabel constraints
 		splitLabel.snp.makeConstraints { current in
 			current.top.equalToSuperview().inset(8)
 			current.leading.equalToSuperview().inset(63)
@@ -134,21 +129,18 @@ class EventView: BaseView {
 			current.width.equalTo(1)
 		}
 		
-//		homeTeamImage constraints
 		homeTeamImageView.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(80)
 			current.top.equalToSuperview().inset(10)
 			current.width.height.equalTo(16)
 		}
 		
-//		awayTeamImage constraints
 		awayTeamImageView.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(80)
 			current.top.equalToSuperview().inset(30)
 			current.size.equalTo(16)
 		}
 			
-//		homeTeamName constraints
 		homeTeamNameLabel.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(104)
 			current.centerY.equalTo(homeTeamImageView.snp.centerY)
@@ -156,7 +148,6 @@ class EventView: BaseView {
 			current.width.equalTo(192)
 		}
 		
-//		awayTeamName constraints
 		awayTeamNameLabel.snp.makeConstraints { current in
 			current.leading.equalToSuperview().inset(104)
 			current.centerY.equalTo(awayTeamImageView.snp.centerY)
@@ -164,7 +155,6 @@ class EventView: BaseView {
 			current.width.equalTo(192)
 		}
 		
-//		homeTeamScore constraints
 		Label.snp.makeConstraints { current in
 			current.trailing.equalToSuperview().inset(16)
 			current.centerY.equalTo(homeTeamNameLabel.snp.centerY)
@@ -172,7 +162,6 @@ class EventView: BaseView {
 			current.width.equalTo(32)
 		}
 		
-//		awayTeamScore constraints
 		awayTeamScore.snp.makeConstraints { current in
 			current.trailing.equalToSuperview().inset(16)
 			current.centerY.equalTo(awayTeamNameLabel.snp.centerY)
@@ -185,14 +174,11 @@ class EventView: BaseView {
 		Label.isHidden = true
 		awayTeamScore.isHidden = true
 		
-//		clock styling
 		clock.textColor = .gray
 		clock.text = "-"
 		
-//		homeTeamName styling
 		homeTeamNameLabel.textColor = .black
 		
-//		awayTeamName styling
 		awayTeamNameLabel.textColor = .black
 	}
 	
@@ -200,19 +186,14 @@ class EventView: BaseView {
 		Label.isHidden = false
 		awayTeamScore.isHidden = false
 		
-//		clock styling
 		clock.textColor = .red
 		
-//		homeTeamName styling
 		homeTeamNameLabel.textColor = .black
 		
-//		awayTeamName styling
 		awayTeamNameLabel.textColor = .black
 		
-//		homeTeamScore styling
 		Label.textColor = .red
 
-//		awayTeamScore styling
 		awayTeamScore.textColor = .red
 	}
 	
@@ -220,20 +201,15 @@ class EventView: BaseView {
 		Label.isHidden = false
 		awayTeamScore.isHidden = false
 		
-//		clock styling
 		clock.textColor = .red
 		clock.text = "HT"
 		
-//		homeTeamName styling
 		homeTeamNameLabel.textColor = .black
 		
-//		awayTeamName styling
 		awayTeamNameLabel.textColor = .black
 		
-//		homeTeamScore styling
 		Label.textColor = .red
 		
-//		awayTeamScore styling
 		awayTeamScore.textColor = .red
 	}
 	
@@ -241,11 +217,9 @@ class EventView: BaseView {
 		Label.isHidden = false
 		awayTeamScore.isHidden = false
 		
-//		clock styling
 		clock.textColor = .gray
 		clock.text = "FT"
 	
-//		teamName && teamScore styling
 		if (event.homeScore! > event.awayScore!) {
 			homeTeamNameLabel.textColor = .black
 			Label.textColor = .black
