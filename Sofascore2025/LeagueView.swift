@@ -50,28 +50,28 @@ final class LeagueView: BaseView {
 	override func setupConstraints() {
 		super.setupConstraints()
 		
-		logoImageView.snp.makeConstraints { current in
-			current.top.equalToSuperview().inset(12)
-			current.width.height.equalTo(32)
-			current.leading.equalToSuperview().inset(16)
+		logoImageView.snp.makeConstraints {
+			$0.top.equalToSuperview().inset(12)
+			$0.width.height.equalTo(32)
+			$0.leading.equalToSuperview().inset(16)
 		}
 		
-		countryLabel.snp.makeConstraints { current in
-			current.centerY.equalTo(logoImageView)
-			current.leading.equalToSuperview().inset(80)
-			current.height.equalTo(24)
+		countryLabel.snp.makeConstraints {
+			$0.centerY.equalTo(logoImageView)
+			$0.leading.equalToSuperview().inset(80)
+			$0.height.equalTo(24)
 		}
 		
-		splitImageView.snp.makeConstraints { current in
-			current.centerY.equalTo(countryLabel)
-			current.leading.equalTo(countryLabel.snp.trailing)
-			current.height.equalTo(countryLabel)
+		splitImageView.snp.makeConstraints {
+			$0.centerY.equalTo(countryLabel)
+			$0.leading.equalTo(countryLabel.snp.trailing)
+			$0.height.equalTo(countryLabel)
 		}
 		
-		nameLabel.snp.makeConstraints { current in
-			current.centerY.equalTo(countryLabel)
-			current.leading.equalTo(splitImageView.snp.trailing)
-			current.height.equalTo(countryLabel)
+		nameLabel.snp.makeConstraints { 
+			$0.centerY.equalTo(countryLabel)
+			$0.leading.equalTo(splitImageView.snp.trailing)
+			$0.height.equalTo(countryLabel)
 		}
 	}
 	

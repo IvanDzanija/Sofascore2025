@@ -38,11 +38,11 @@ class ViewController: UIViewController {
 			current.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
 		}
 		for event in events {
-			let eventView = EventView(match: event)
+			let eventView = EventView(event: event)
 			eventViewList.addArrangedSubview(eventView)
 			eventView.snp.makeConstraints { current in
-				current.height.equalTo(56)
-				current.width.equalTo(eventViewList.snp.width)
+//				current.height.equalTo(56)
+//				current.width.equalTo(eventViewList.snp.width)
 			}
 		}
 		
