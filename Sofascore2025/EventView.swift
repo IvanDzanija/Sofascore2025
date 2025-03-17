@@ -5,7 +5,7 @@ import SofaAcademic
 
 class EventView: BaseView {
 	private var _match : Event
-	private var homeTeamImage = UIImageView()
+	private var homeTeamImageView = UIImageView()
 	private var awayTeamImage = UIImageView()
 	private var homeTeamName = UILabel()
 	private var awayTeamName = UILabel()
