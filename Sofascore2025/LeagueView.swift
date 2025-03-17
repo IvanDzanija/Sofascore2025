@@ -1,3 +1,10 @@
+//
+//  Styling.swift
+//  Sofascore2025
+//
+//  Created by Ivan Dzanija on 16.03.2025..
+//
+
 import UIKit
 import SnapKit
 import SofaAcademic
@@ -27,20 +34,22 @@ final class LeagueView: BaseView {
 		logoImageView.contentMode = .scaleAspectFit
 		logoImageView.clipsToBounds = true
 
-		countryLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+		countryLabel.font = FontStyle.smallBold
 		countryLabel.textColor = .black
 		
 		splitImageView.contentMode = .scaleAspectFit
 		splitImageView.clipsToBounds = true
 		splitImageView.image = UIImage(named: "ic_pointer_right")
 		
-		nameLabel.font = UIFont(name: "Roboto-Regular", size: 14)
+		nameLabel.font = FontStyle.small
 		nameLabel.textColor = .gray
 			
-		if let logoUrl = self.league.logoUrl, let url = URL(string: logoUrl) {
-				loadImage(from: url)
+		if let urlLogo = league.logoUrl {
+			ImageLoader.loadImage(from: urlLogo){
+				self.logoImageView.image = $0
+			}
 		}
-		if let countryName = self.league.country?.name {
+		if let countryName = league.country?.name {
 			countryLabel.text = countryName
 		}
 		nameLabel.text = league.name
@@ -52,36 +61,24 @@ final class LeagueView: BaseView {
 		
 		logoImageView.snp.makeConstraints {
 			$0.top.equalToSuperview().inset(12)
-			$0.width.height.equalTo(32)
 			$0.leading.equalToSuperview().inset(16)
+			$0.size.equalTo(32)
 		}
 		
 		countryLabel.snp.makeConstraints {
 			$0.centerY.equalTo(logoImageView)
-			$0.leading.equalToSuperview().inset(80)
-			$0.height.equalTo(24)
+			$0.leading.equalTo(logoImageView.snp.trailing).offset(32)
 		}
 		
 		splitImageView.snp.makeConstraints {
 			$0.centerY.equalTo(countryLabel)
 			$0.leading.equalTo(countryLabel.snp.trailing)
-			$0.height.equalTo(countryLabel)
+			$0.size.equalTo(16)
 		}
 		
 		nameLabel.snp.makeConstraints { 
 			$0.centerY.equalTo(countryLabel)
 			$0.leading.equalTo(splitImageView.snp.trailing)
-			$0.height.equalTo(countryLabel)
 		}
 	}
-	
-	private func loadImage(from url: URL) {
-			URLSession.shared.dataTask(with: url) { data, response, error in
-				if let data = data, let image = UIImage(data: data) {
-					DispatchQueue.main.async {
-						self.logoImageView.image = image
-					}
-				}
-			}.resume()
-		}
 }

@@ -9,43 +9,74 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class ViewController: UIViewController {
-	
+class ViewController: UIViewController{
 	private var data = Homework2DataSource()
+	private var leagueView : LeagueView!
+	private var eventViewList = [EventView]()
 	
 	override func viewDidLoad() {
+		
 		super.viewDidLoad()
 		self.view.backgroundColor = .white
-		
-//		load league
-		let league = data.laLigaLeague()
-		let leagueView = LeagueView(league: league)
+		LoadLeague()
+		LoadEvents()
+		addViews()
+		styleViews()
+		setupConstraints()
+	}
+	
+	private func addViews() {
 		self.view.addSubview(leagueView)
-		leagueView.snp.makeConstraints { current in
-			current.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-			current.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
-			current.height.equalTo(56)
+		for eventView in eventViewList {
+			self.view.addSubview(eventView)
+		}
+	}
+	
+	private func styleViews(){
+		self.view.backgroundColor = .white
+	}
+	
+	private func setupConstraints(){
+		
+		leagueView.snp.makeConstraints {
+			$0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+			$0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+			$0.height.equalTo(56)
 		}
 		
-//		load events
-		let events = data.laLigaEvents()
-		let eventViewList = UIStackView()
-		self.view.addSubview(eventViewList)
-		eventViewList.axis = .vertical
-		eventViewList.snp.makeConstraints { current in
-			current.top.equalTo(leagueView.snp.bottom)
-			current.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
-			current.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
-		}
-		for event in events {
-			let eventView = EventView(event: event)
-			eventViewList.addArrangedSubview(eventView)
-			eventView.snp.makeConstraints { current in
-//				current.height.equalTo(56)
-//				current.width.equalTo(eventViewList.snp.width)
+//		probao sam prebaciti ovako, ali dalje moram hardcodat visinu 
+		for (index, eventView) in eventViewList.enumerated() {
+			if index == 0{
+				eventView.snp.makeConstraints {
+					$0.top.equalTo(leagueView.snp.bottom)
+					$0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+					$0.height.equalTo(56)
+				}
+			}
+			else{
+				eventView.snp.makeConstraints {
+					$0.top.equalTo(eventViewList[index - 1].snp.bottom)
+					$0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+					$0.height.equalTo(56)
+				}
+				
 			}
 		}
-		
 	}
+	
+	private func LoadLeague(){
+		let league = data.laLigaLeague()
+		leagueView = LeagueView(league: league)
+	}
+	
+	private func LoadEvents(){
+		let events = data.laLigaEvents()
+		for event in events {
+			let eventView = EventView(event: event)
+			eventViewList.append(eventView)
+		}
+	}
+	
+	
 }
 
