@@ -36,17 +36,41 @@ class EventView: BaseView {
 		super.styleViews()
 		backgroundColor = .white
 		
+		let formatter = DateFormatter()
+		formatter.dateFormat = "HH:mm"
+
+		startTime.text = formatter.string(from : Date(timeIntervalSince1970: TimeInterval(_match.startTimestamp)))
+		
+		homeTeamName.text = _match.homeTeam.name
+		awayTeamName.text =  _match.awayTeam.name
+		
+		if let homeScore = _match.homeScore {
+			homeTeamScore.text = String(homeScore)
+		}
+		if let awayScore = _match.awayScore {
+			awayTeamScore.text = String(awayScore)
+		}
+
+		
+		if let urlHome = _match.homeTeam.logoUrl, let url = URL(string: urlHome) {
+			loadImage(from: url, isHome: true)
+		}
+		if let urlAway = _match.awayTeam.logoUrl, let url = URL(string: urlAway) {
+			loadImage(from: url, isHome: false)
+		}
+		
+		
 //		clock styling -> only font is constant
-		clock.font = UIFont(name: "Roboto-Regular", size: 12)
+//		clock.font = UIFont(name: "Roboto-Regular", size: 12)
 		clock.textAlignment = .center
 	
 //		startTime styling
-		startTime.font = UIFont(name: "Roboto-Regular", size: 12)
+//		startTime.font = UIFont(name: "Roboto-Regular", size: 12)
 		startTime.textColor = .gray
 		startTime.textAlignment = .center
 		
 //		splitLabel styling
-		splitLabel.image = UIImage(named: "vs")
+		splitLabel.image = UIImage(named: "Divider Horizontal")
 		splitLabel.contentMode = .scaleAspectFit
 		splitLabel.clipsToBounds = true
 		
@@ -59,8 +83,8 @@ class EventView: BaseView {
 		awayTeamImage.clipsToBounds = true
 		
 //		teamName styling -> only font is constant
-		homeTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
-		awayTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
+//		homeTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
+//		awayTeamName.font = UIFont(name: "Roboto-Regular", size: 14)
 		
 //		score styling -> only font is constant
 		homeTeamScore.font = UIFont(name: "Roboto-Regular", size: 14)
@@ -71,6 +95,9 @@ class EventView: BaseView {
 			setupUpcomingStyle()
 		}
 		else if (self._match.status == .inProgress) {
+			let elapsedTime = Int(Date().timeIntervalSince1970) - self._match.startTimestamp
+			let minutes = elapsedTime / 60
+			clock.text = String(minutes) + "'"
 			setupInProgressStyle()
 		}
 		else if (self._match.status == .halftime) {
@@ -88,26 +115,24 @@ class EventView: BaseView {
 		
 //		startTime constraints
 		startTime.snp.makeConstraints { current in
-			current.top.equalToSuperview().offset(8)
-			current.leading.equalToSuperview().offset(8)
-			current.height.equalTo(16)
+			current.top.equalToSuperview()
 			current.width.equalTo(56)
+//			current.leading.equalToSuperview().offset(8)
 		}
 		
 //		clock constraints
 		clock.snp.makeConstraints { current in
 			current.centerX.equalTo(startTime.snp.centerX)
 			current.top.equalTo(startTime.snp.bottom).offset(8)
-			current.leading.equalTo(startTime.snp.trailing).offset(8)
-			current.height.equalTo(16)
+//			current.leading.equalTo(startTime.snp.trailing).offset(8)
+//			current.height.equalTo(16)
 			current.width.equalTo(56)
 		}
 		
 //		splitLabel constraints
 		splitLabel.snp.makeConstraints { current in
-			current.centerX.equalToSuperview()
-			current.top.equalToSuperview().offset(8)
-			current.leading.equalToSuperview().offset(64)
+			current.top.equalToSuperview().inset(8)
+			current.leading.equalTo(startTime.snp.trailing).offset(4)
 			current.height.equalTo(40)
 			current.width.equalTo(1)
 		}
@@ -182,8 +207,6 @@ class EventView: BaseView {
 		
 //		clock styling
 		clock.textColor = .red
-		// fix to time
-		clock.text = "LIVE"
 		
 //		homeTeamName styling
 		homeTeamName.textColor = .black
@@ -248,5 +271,21 @@ class EventView: BaseView {
 			awayTeamScore.textColor = .black
 		}
 	}
+	
+	private func loadImage(from url: URL, isHome: Bool) {
+			URLSession.shared.dataTask(with: url) { data, response, error in
+				if let data = data, let image = UIImage(data: data) {
+					DispatchQueue.main.async {
+						if (isHome) {
+							self.homeTeamImage.image = image
+						}
+						else {
+							self.awayTeamImage.image = image
+						}
+						
+					}
+				}
+			}.resume()
+		}
 		
 }

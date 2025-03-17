@@ -15,10 +15,10 @@ class LeagueView: BaseView {
 	}
 	override func addViews() {
 		super.addViews()
-//		addSubview(logoLabel)
+		addSubview(logoLabel)
 		addSubview(countryLabel)
-//		addSubview(splitLabel)
-//		addSubview(nameLabel)
+		addSubview(splitLabel)
+		addSubview(nameLabel)
 	}
 
 	override func styleViews() {
@@ -39,7 +39,7 @@ class LeagueView: BaseView {
 		splitLabel.image = UIImage(named: "ic_pointer_right")
 		
 //		nameLabel styling
-		nameLabel.font = UIFont(name: "Roboto-Regular",size: 14)
+//		nameLabel.font = UIFont(name: "Roboto-Regular",size: 14)
 		nameLabel.textColor = .gray
 		
 			
@@ -48,7 +48,6 @@ class LeagueView: BaseView {
 		}
 		if let countryName = self.league.country?.name {
 			countryLabel.text = countryName
-			print(countryLabel.text)
 		}
 		nameLabel.text = league.name
 
@@ -58,35 +57,32 @@ class LeagueView: BaseView {
 		super.setupConstraints()
 		
 //		 logoLabel constraints
-//		logoLabel.snp.makeConstraints { current in
-//			current.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(16)
-//			current.width.height.equalTo(32)
-//			current.leading.equalToSuperview().inset(16)
-//		}
+		logoLabel.snp.makeConstraints { current in
+			current.top.equalToSuperview().inset(16)
+			current.width.height.equalTo(32)
+			current.leading.equalToSuperview().inset(20)
+		}
 		
 //		 countryLabel constraints
 		countryLabel.snp.makeConstraints { current in
-//			current.centerY.equalTo(logoLabel)
-//			current.leading.equalTo(logoLabel.snp.right).offset(32)
-			current.leading.equalToSuperview().inset(16)
+			current.centerY.equalTo(logoLabel)
+			current.leading.equalToSuperview().inset(60)
 			current.height.equalTo(24)
-			current.width.equalTo(36)
 		}
 		
 //		 splitLabel constraints
-//		splitLabel.snp.makeConstraints { current in
-//			current.centerY.equalTo(countryLabel)
-//			current.leading.equalTo(countryLabel.snp.right).offset(16)
-//			current.width.height.equalTo(16)
-//		}
+		splitLabel.snp.makeConstraints { current in
+			current.centerY.equalTo(countryLabel)
+			current.leading.equalToSuperview().offset(100)
+			current.height.equalTo(24)
+		}
 		
 //		 nameLabel constraints
-//		nameLabel.snp.makeConstraints { current in
-//			current.centerY.equalTo(countryLabel)
-//			current.leading.equalTo(splitLabel.snp.right).offset(10)
-//			current.height.equalTo(countryLabel)
-//			current.width.equalTo(90)
-//		}
+		nameLabel.snp.makeConstraints { current in
+			current.centerY.equalTo(countryLabel)
+			current.leading.equalToSuperview().inset(130)
+			current.height.equalTo(countryLabel)
+		}
 		
 	}
 	private func loadImage(from url: URL) {

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import SofaAcademic
 
-class MainViewController: UIViewController {
+class ViewController: UIViewController {
 	
 	private var data = Homework2DataSource()
 	
@@ -23,22 +23,28 @@ class MainViewController: UIViewController {
 		self.view.addSubview(leagueView)
 		leagueView.snp.makeConstraints { current in
 			current.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(8)
-			current.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(16)
-			current.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-16)
+			current.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
 			current.height.equalTo(64)
 		}
 		
 //		load events
 		let events = data.laLigaEvents()
 		let eventViewList = UIStackView()
+		self.view.addSubview(eventViewList)
 		eventViewList.axis = .vertical
-		
+		eventViewList.snp.makeConstraints { current in
+			current.top.equalTo(leagueView.snp.bottom).offset(16)
+			current.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
+			current.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
+		}
 		for event in events {
 			let eventView = EventView(match: event)
 			eventViewList.addArrangedSubview(eventView)
-			eventView.snp.makeConstraints { make in
-				make.height.equalTo(56)
+			eventView.snp.makeConstraints { current in
+				current.height.equalTo(56)
+				current.width.equalTo(eventViewList.snp.width)
 			}
+			eventView.backgroundColor = .yellow
 		}
 		
 	}
