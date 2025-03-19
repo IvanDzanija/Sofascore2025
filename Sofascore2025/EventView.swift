@@ -126,7 +126,7 @@ class EventView: BaseView {
 
 		homeTeamNameLabel.snp.makeConstraints {
 			$0.leading.equalTo(homeTeamImageView.snp.trailing).offset(8)
-			$0.centerY.equalTo(homeTeamImageView.snp.centerY)
+			$0.centerY.equalTo(homeTeamImageView)
 		}
 
 		awayTeamNameLabel.snp.makeConstraints {
