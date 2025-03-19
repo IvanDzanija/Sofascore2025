@@ -39,7 +39,7 @@ class ViewController: UIViewController {
 	private func setupConstraints() {
 		leagueView.snp.makeConstraints {
 			$0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-			$0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide)
+			$0.leading.trailing.equalToSuperview()
 		}
 
 		let eventStackView = UIStackView()
