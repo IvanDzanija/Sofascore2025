@@ -136,7 +136,7 @@ class EventView: BaseView {
 		}
 
 		homeTeamScoreLabel.snp.makeConstraints {
-			$0.trailing.equalToSuperview().offset(-16)
+			$0.trailing.equalToSuperview().inset(16)
 			$0.centerY.equalTo(homeTeamNameLabel.snp.centerY)
 		}
 
