@@ -9,64 +9,60 @@ import Foundation
 import SofaAcademic
 import UIKit
 
-protocol EventViewModelProtocol {
-	var title: String { get }
-	var subtitle: String { get }
-	var imageURL: String { get }
-	func fetchData()
-}
+struct EventViewModel {
+	public let homeTeam: Team
+	public let awayTeam: Team
+	public let status: EventStatus
+	public let startTimestamp: Int
+	public let homeScore: Int
+	public let awayScore: Int
 
-public extension Event {
-	var time : String {
-		if self.status == .notStarted{
+	public var time: String {
+		switch self.status {
+		case .notStarted:
 			return "-"
-		}
-		else if self.status == .finished{
+		case .finished:
 			return "FT"
-		}
-		else if self.status == .halftime{
+		case .halftime:
 			return "HT"
+		default:
+			let time =
+				(Int(Date().timeIntervalSince1970) - self.startTimestamp)
+				/ 60
+			return String(time) + "'"
 		}
-		else{
-			let timer = (Int(Date().timeIntervalSince1970) - self.startTimestamp) / 60
-			return String(timer) + "'"
-		}
-		
 	}
-	
-	var formattedStartTime: String {
-		let date = Date(timeIntervalSince1970: TimeInterval(startTimestamp))
+
+	public var formattedStartTime: String {
+		let date = Date(
+			timeIntervalSince1970: TimeInterval(self.startTimestamp))
 		let formatter = DateFormatter()
 		formatter.dateFormat = "HH:mm"
 		return formatter.string(from: date)
 	}
-	
-	func findColors() -> (UIColor, UIColor, UIColor) {
-		if self.status == .finished{
-			let homeTeamScore = self.homeScore ?? 0
-			let awayTeamScore = self.awayScore ?? 0
-			if homeTeamScore > awayTeamScore{
-				return (.black, .gray, .gray)
-			}
-			else if homeTeamScore < awayTeamScore{
-				return (.gray, .black, .gray)
-			}
-			else{
-				return (.black, .black, .gray)
-			}
-		}else if self.status == .notStarted{
+
+	public var modelColors: (UIColor, UIColor, UIColor) {
+		switch self.status {
+		case .finished:
+			let homeColor =
+				homeScore >= awayScore ? UIColor.black : UIColor.gray
+			let awayColor =
+				homeScore <= awayScore ? UIColor.black : UIColor.gray
+			return (homeColor, awayColor, .gray)
+
+		case .notStarted:
 			return (.gray, .gray, .gray)
-		}
-		else{
+		default:
 			return (.red, .red, .red)
 		}
 	}
-		
-			
-	
-		
-	
-	
+
+	init(event: Event) {
+		self.homeTeam = event.homeTeam
+		self.awayTeam = event.awayTeam
+		self.status = event.status
+		self.startTimestamp = event.startTimestamp
+		self.homeScore = event.homeScore ?? 0
+		self.awayScore = event.awayScore ?? 0
+	}
 }
-	
-	

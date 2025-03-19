@@ -9,24 +9,21 @@ import Foundation
 import UIKit
 
 enum ImageLoader {
-	static func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+	static func loadImage(
+		from urlString: String, completion: @escaping (UIImage?) -> Void
+	) {
 		guard let url = URL(string: urlString) else {
 			completion(nil)
 			return
 		}
-
 		URLSession.shared.dataTask(with: url) { data, response, error in
-			if let data = data, let image = UIImage(data: data) {
-				DispatchQueue.main.async {
-					completion(image)
-				}
-			} else {
-				DispatchQueue.main.async {
-					completion(nil)
-				}
+			guard let data = data else {
+				completion(nil)
+				return
 			}
+			let image = UIImage(data: data)
+			completion(image)
+
 		}.resume()
 	}
 }
-
-
