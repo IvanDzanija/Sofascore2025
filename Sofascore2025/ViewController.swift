@@ -12,7 +12,7 @@ import UIKit
 class ViewController: UIViewController {
 	private var data = Homework2DataSource()
 	private var leagueView: LeagueView!
-
+	private var eventStackView = UIStackView()
 	private var eventViewList = [EventView]()
 
 	override func viewDidLoad() {
@@ -30,10 +30,16 @@ class ViewController: UIViewController {
 		for eventView in eventViewList {
 			self.view.addSubview(eventView)
 		}
+
+		view.addSubview(eventStackView)
+		for eventView in eventViewList {
+			eventStackView.addArrangedSubview(eventView)
+		}
 	}
 
 	private func styleViews() {
 		view.backgroundColor = .white
+		eventStackView.axis = .vertical
 	}
 
 	private func setupConstraints() {
@@ -42,16 +48,11 @@ class ViewController: UIViewController {
 			$0.leading.trailing.equalToSuperview()
 		}
 
-		let eventStackView = UIStackView()
-		view.addSubview(eventStackView)
-		eventStackView.axis = .vertical
 		eventStackView.snp.makeConstraints {
 			$0.top.equalTo(leagueView.snp.bottom)
 			$0.leading.trailing.equalToSuperView()
 		}
-		for eventView in eventViewList {
-			eventStackView.addArrangedSubview(eventView)
-		}
+
 	}
 
 	private func loadLeague() {

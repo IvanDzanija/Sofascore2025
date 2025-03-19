@@ -23,7 +23,6 @@ enum ImageLoader {
 			}
 			let image = UIImage(data: data)
 			completion(image)
-
 		}.resume()
 	}
 }
