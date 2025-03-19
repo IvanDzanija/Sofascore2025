@@ -60,14 +60,12 @@ class EventView: BaseView {
 			}
 		}
 
-		let colors = eventViewModel.modelColors
-
 		splitView.backgroundColor = .gray
 
 		clockLabel.font = .micro
 		clockLabel.textAlignment = .center
 		clockLabel.text = eventViewModel.time
-		clockLabel.textColor = colors.2
+		clockLabel.textColor = eventViewModel.clockAndScoreColor
 
 		startTimeLabel.text = eventViewModel.formattedStartTime
 		startTimeLabel.font = .micro
@@ -83,13 +81,13 @@ class EventView: BaseView {
 		awayTeamNameLabel.text = eventViewModel.awayTeam.name
 		homeTeamNameLabel.font = .small
 		awayTeamNameLabel.font = .small
-		homeTeamNameLabel.textColor = colors.0
-		awayTeamNameLabel.textColor = colors.1
+		homeTeamNameLabel.textColor = eventViewModel.homeColor
+		awayTeamNameLabel.textColor = eventViewModel.awayColor
 
 		homeTeamScoreLabel.font = .small
 		awayTeamScoreLabel.font = .small
-		homeTeamScoreLabel.textColor = colors.0
-		awayTeamScoreLabel.textColor = colors.1
+		homeTeamScoreLabel.textColor = eventViewModel.homeColor
+		awayTeamScoreLabel.textColor = eventViewModel.awayColor
 	}
 
 	override func setupConstraints() {
@@ -109,6 +107,7 @@ class EventView: BaseView {
 			$0.leading.equalTo(startTimeLabel.snp.trailing).offset(16)
 			$0.height.equalTo(40)
 			$0.width.equalTo(1)
+			$0.bottom.equalToSuperview()
 		}
 
 		homeTeamImageView.snp.makeConstraints {

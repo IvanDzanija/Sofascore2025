@@ -10,26 +10,16 @@ import SnapKit
 import UIKit
 
 extension UIFont {
-	static let micro =
-		UIFont(name: "Roboto-Regular", size: 12)
-		?? UIFont.systemFont(ofSize: 12)
-	static let small =
-		UIFont(name: "Roboto-Regular", size: 14)
-		?? UIFont.systemFont(ofSize: 14)
-	static let medium =
-		UIFont(name: "Roboto-Regular", size: 16)
-		?? UIFont.systemFont(ofSize: 16)
-	static let large =
-		UIFont(name: "Roboto-Regular", size: 18)
-		?? UIFont.systemFont(ofSize: 18)
+	static func custom(name: String, size: CGFloat) -> UIFont {
+		UIFont(name: name, size: size) ?? UIFont.systemFont(ofSize: size)
+	}
+	static let micro = custom(name: "Roboto-Regular", size: 12)
+	static let small = custom(name: "Roboto-Regular", size: 14)
+	static let medium = custom(name: "Roboto-Regular", size: 16)
+	static let large = custom(name: "Roboto-Regular", size: 18)
 
-	static let microBold =
-		UIFont(name: "Roboto-Bold", size: 12) ?? UIFont.systemFont(ofSize: 12)
-	static let smallBold =
-		UIFont(name: "Roboto-Bold", size: 14) ?? UIFont.systemFont(ofSize: 14)
-	static let mediumBold =
-		UIFont(name: "Roboto-Bold", size: 16) ?? UIFont.systemFont(ofSize: 16)
-	static let largeBold =
-		UIFont(name: "Roboto-Bold", size: 18) ?? UIFont.systemFont(ofSize: 18)
-
+	static let microBold = custom(name: "Roboto-Bold", size: 12)
+	static let smallBold = custom(name: "Roboto-Bold", size: 14)
+	static let mediumBold = custom(name: "Roboto-Bold", size: 16)
+	static let largeBold = custom(name: "Roboto-Bold", size: 18)
 }

@@ -9,16 +9,21 @@ import SnapKit
 import SofaAcademic
 import UIKit
 
-final class LeagueView: BaseView {
-	private let league: League
-	private let logoImageView = UIImageView()
-	private let countryLabel = UILabel()
-	private let splitImageView = UIImageView()
-	private let nameLabel = UILabel()
+class LeagueView: BaseView {
 
-	init(league: League) {
+	private var logoImageView: UIImageView = UIImageView()
+	private var countryLabel: UILabel = UILabel()
+	private var splitImageView: UIImageView = UIImageView()
+	private var nameLabel: UILabel = UILabel()
+	private var league: League?
+
+	public func loadData(league: League) {
 		self.league = league
-		super.init()
+		addViews()
+		styleViews()
+		setupConstraints()
+		setupGestureRecognizers()
+		setupBinding()
 	}
 
 	override func addViews() {
@@ -44,6 +49,7 @@ final class LeagueView: BaseView {
 		nameLabel.font = .small
 		nameLabel.textColor = .gray
 
+		guard let league = league else { return }
 		if let urlLogo = league.logoUrl {
 			ImageLoader.loadImage(from: urlLogo) { (image) in
 				DispatchQueue.main.async {
@@ -58,8 +64,6 @@ final class LeagueView: BaseView {
 	}
 
 	override func setupConstraints() {
-		super.setupConstraints()
-
 		logoImageView.snp.makeConstraints {
 			$0.top.bottom.equalToSuperview().inset(12)
 			$0.leading.equalToSuperview().inset(16)
@@ -80,6 +84,7 @@ final class LeagueView: BaseView {
 		nameLabel.snp.makeConstraints {
 			$0.centerY.equalTo(countryLabel)
 			$0.leading.equalTo(splitImageView.snp.trailing)
+			$0.trailing.lessThanOrEqualToSuperview().inset(16)
 		}
 	}
 }

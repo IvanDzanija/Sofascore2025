@@ -16,6 +16,38 @@ struct EventViewModel {
 	public let startTimestamp: Int
 	public let homeScore: Int
 	public let awayScore: Int
+	public var homeColor: UIColor {
+		switch status {
+		case .finished:
+			return homeScore >= awayScore ? UIColor.black : UIColor.gray
+		case .notStarted:
+			return .gray
+		default:
+			return .red
+		}
+	}
+
+	public var awayColor: UIColor {
+		switch status {
+		case .finished:
+			return awayScore >= homeScore ? UIColor.black : UIColor.gray
+		case .notStarted:
+			return .gray
+		default:
+			return .red
+		}
+	}
+
+	public var clockAndScoreColor: UIColor {
+		switch status {
+		case .inProgress:
+			return .red
+		case .halftime:
+			return .red
+		default:
+			return .gray
+		}
+	}
 
 	public var time: String {
 		switch self.status {
@@ -26,35 +58,16 @@ struct EventViewModel {
 		case .halftime:
 			return "HT"
 		default:
-			let time =
-				(Int(Date().timeIntervalSince1970) - self.startTimestamp)
-				/ 60
+			let time = (Int(Date().timeIntervalSince1970) - startTimestamp) / 60
 			return String(time) + "'"
 		}
 	}
 
 	public var formattedStartTime: String {
-		let date = Date(
-			timeIntervalSince1970: TimeInterval(self.startTimestamp))
+		let date = Date(timeIntervalSince1970: TimeInterval(startTimestamp))
 		let formatter = DateFormatter()
 		formatter.dateFormat = "HH:mm"
 		return formatter.string(from: date)
-	}
-
-	public var modelColors: (UIColor, UIColor, UIColor) {
-		switch self.status {
-		case .finished:
-			let homeColor =
-				homeScore >= awayScore ? UIColor.black : UIColor.gray
-			let awayColor =
-				homeScore <= awayScore ? UIColor.black : UIColor.gray
-			return (homeColor, awayColor, .gray)
-
-		case .notStarted:
-			return (.gray, .gray, .gray)
-		default:
-			return (.red, .red, .red)
-		}
 	}
 
 	init(event: Event) {
