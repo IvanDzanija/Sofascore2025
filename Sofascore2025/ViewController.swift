@@ -47,7 +47,7 @@ class ViewController: UIViewController {
 		eventStackView.axis = .vertical
 		eventStackView.snp.makeConstraints {
 			$0.top.equalTo(leagueView.snp.bottom)
-			$0.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
+			$0.leading.trailing.equalToSuperView()
 		}
 		for eventView in eventViewList {
 			eventStackView.addArrangedSubview(eventView)
