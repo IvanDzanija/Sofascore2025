@@ -19,11 +19,26 @@ class LeagueView: BaseView {
 
 	public func loadData(league: League) {
 		self.league = league
-		addViews()
-		styleViews()
-		setupConstraints()
-		setupGestureRecognizers()
-		setupBinding()
+		configure()
+	}
+
+	private func configure() {
+		splitImageView.image = UIImage(named: "ic_pointer_right")
+
+		guard let league = league else { return }
+		if let urlLogo = league.logoUrl {
+			ImageLoader.loadImage(from: urlLogo) { (image) in
+				DispatchQueue.main.async {
+					self.logoImageView.image = image
+				}
+			}
+		}
+
+		if let countryName = league.country?.name {
+			countryLabel.text = countryName
+		}
+
+		nameLabel.text = league.name
 	}
 
 	override func addViews() {
@@ -44,23 +59,9 @@ class LeagueView: BaseView {
 
 		splitImageView.contentMode = .scaleAspectFit
 		splitImageView.clipsToBounds = true
-		splitImageView.image = UIImage(named: "ic_pointer_right")
 
 		nameLabel.font = .small
 		nameLabel.textColor = .gray
-
-		guard let league = league else { return }
-		if let urlLogo = league.logoUrl {
-			ImageLoader.loadImage(from: urlLogo) { (image) in
-				DispatchQueue.main.async {
-					self.logoImageView.image = image
-				}
-			}
-		}
-		if let countryName = league.country?.name {
-			countryLabel.text = countryName
-		}
-		nameLabel.text = league.name
 	}
 
 	override func setupConstraints() {
